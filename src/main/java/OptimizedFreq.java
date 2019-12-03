@@ -3,7 +3,10 @@ import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Scanner;
+import java.util.Set;
 
 
 /**
@@ -12,8 +15,18 @@ import java.util.*;
 public class OptimizedFreq {
     private static final int MaxSize = 1000;        // Make it a sufficient size 
     private static Logger log = LoggerFactory.getLogger(OptimizedFreq.class);
-    public static void main(String... args) throws FileNotFoundException {
 
+    public static void main(String... args) {
+        try {
+            processDataFile();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    static private void processDataFile() throws FileNotFoundException {
         File inputFile = new File("data.txt");
         final Scanner scanner = new Scanner(inputFile);
 
@@ -22,6 +35,7 @@ public class OptimizedFreq {
         // Collect values from data file and store in array
 
         int i = 0;
+
         while (scanner.hasNext()) {
             nextLine = scanner.nextLine();
             log.info("computing frequency counts for {}", nextLine);
@@ -31,7 +45,7 @@ public class OptimizedFreq {
             Arrays.sort(newArray);
             Set<Comparable<? super String>> processed = new HashSet<>();
             processed.clear();
-
+            log.info("**** Starting recursive count computation ****");
             // uses the logic that length( repeating character in a sorted list) = lastIndex - firstIndex + 1)
             for (String val : newArray) {
                 if (!processed.contains(val)) {
@@ -42,6 +56,7 @@ public class OptimizedFreq {
             }
 
             processed.clear();
+            log.info("**** Starting iterative count computation ****");
             for (String val : newArray)
                 if (!processed.contains(val)) {
                     log.info("Frequency of {} is : {}", val,
@@ -67,6 +82,7 @@ public class OptimizedFreq {
         }
         return lastIndex - firstIndex + 1;
     }
+
     /*
      This is an O(n) function in terms of time complexity - worst case
      is when array has all same element duplicated we have to do a full N comparisons.
