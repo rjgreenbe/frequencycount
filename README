@@ -1,0 +1,26 @@
+
+1. Imperative Case is a linear search which is O(N) in the worst case. There is an optimization (that uses the
+fact that array is sorted) that breaks out of the loop if we encounter a number in the array that is greater than the element desired.
+In the worst case we will still do N comparisons. For example, when N=4 and entire array is same element, this degenerates
+into 4 comparisons.
+
+2. The improved case is the binary search where we have LogN + O(C) recursive calls where C is a constant. So,
+ in general, for computing the first and last indices, each one is Log2(n) as follows:
+    If Length of array = n
+    At 1st recursion, we reduce the size of our active array to n/2
+    At 2nd recursion, we reduce the search size of our array = (n⁄2)⁄2 = n⁄4
+    and so on...
+ Therefore, after Iteration k,
+    Length of array = n⁄2^k
+
+ Also, we know that after k divisions, the length of array becomes 1
+ Therefore
+ Length of array = n⁄2^k = 1
+ => n = 2^k
+ Applying log function on both sides:
+ => log2 (n) = log2 (2^k)
+ => log2 (n) = k log2 (2)
+Therefore k = log2 (n)
+~O(log2(N)
+
+
