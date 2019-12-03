@@ -1,33 +1,3 @@
-import org.eclipse.collections.api.LazyIterable;
-import org.eclipse.collections.api.RichIterable;
-import org.eclipse.collections.api.bag.MutableBag;
-import org.eclipse.collections.api.bag.sorted.MutableSortedBag;
-import org.eclipse.collections.api.bimap.MutableBiMap;
-import org.eclipse.collections.api.block.function.Function;
-import org.eclipse.collections.api.block.function.Function0;
-import org.eclipse.collections.api.block.function.Function2;
-import org.eclipse.collections.api.block.function.Function3;
-import org.eclipse.collections.api.block.function.primitive.*;
-import org.eclipse.collections.api.block.predicate.Predicate;
-import org.eclipse.collections.api.block.predicate.Predicate2;
-import org.eclipse.collections.api.block.procedure.Procedure;
-import org.eclipse.collections.api.block.procedure.Procedure2;
-import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
-import org.eclipse.collections.api.collection.primitive.*;
-import org.eclipse.collections.api.list.MutableList;
-import org.eclipse.collections.api.map.MutableMap;
-import org.eclipse.collections.api.map.MutableMapIterable;
-import org.eclipse.collections.api.map.primitive.MutableObjectDoubleMap;
-import org.eclipse.collections.api.map.primitive.MutableObjectLongMap;
-import org.eclipse.collections.api.map.sorted.MutableSortedMap;
-import org.eclipse.collections.api.multimap.MutableMultimap;
-import org.eclipse.collections.api.multimap.set.MutableSetMultimap;
-import org.eclipse.collections.api.partition.set.PartitionMutableSet;
-import org.eclipse.collections.api.set.*;
-import org.eclipse.collections.api.set.primitive.*;
-import org.eclipse.collections.api.set.sorted.MutableSortedSet;
-import org.eclipse.collections.api.tuple.Pair;
-import org.eclipse.collections.api.tuple.Twin;
 import org.eclipse.collections.impl.list.mutable.FastList;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,7 +5,6 @@ import org.slf4j.LoggerFactory;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.*;
-import java.util.concurrent.ExecutorService;
 
 /**
  * R Greenberg. 732.742.4792; count frequency for all array elements in sorted order.
@@ -58,11 +27,8 @@ public class OptimizedFreq {
     }
 
     /**
-     *
      * @param dataFile
-     * @throws FileNotFoundException
-     *
-     * Input data from file and insert into array for processing
+     * @throws FileNotFoundException Input data from file and insert into array for processing
      */
     static private void processDataFile(String dataFile) throws FileNotFoundException {
         File inputFile = new File(dataFile);
@@ -98,13 +64,12 @@ public class OptimizedFreq {
     }
 
     /**
-     *
      * @param startIndex
      * @param endIndex
      * @param arr
      * @param element
      * @return frequency count of element
-     *
+     * <p>
      * This is an O(LogN) comparison time complexity. It uses the fact that each character presented to the array
      * to get its frequency count will have its length be its lastIndex - firstIndex + 1.
      */
@@ -123,36 +88,31 @@ public class OptimizedFreq {
     }
 
     /**
-     *
      * @param arr
      * @param element
-     * @return
-     *
-     *
-     * This is an O(n) function in terms of time complexity - worst case
+     * @return This is an O(n) function in terms of time complexity - worst case
      * is when array has all same element duplicated we have to do a full N comparisons.
      */
+
     public static Integer processImperative(String arr[], String element) {
         int count = 0;
         for (Comparable<String> s1 : arr) {
             if (s1.equals(element)) count++;
-            // if we are traversing elements that are lexicographically greater then the element
-            // we are searching for, because the array is sorted, we will no longer encounter
-            // that element, and we can stop iterating through loop.
+                // if we are traversing elements that are lexicographically greater then the element
+                // we are searching for, because the array is sorted, we will no longer encounter
+                // that element, and we can stop iterating through loop.
             else if (s1.compareTo(element) > 0) break;
         }
         return count;
     }
 
     /**
-     *
      * @param startIndex
      * @param endIndex
      * @param arr
      * @param elem
      * @return first element index in array
-     *
-     *
+     * <p>
      * Binary Search to find first element index in array; ~O(LogN) time complexity
      */
 
@@ -179,14 +139,12 @@ public class OptimizedFreq {
     }
 
     /**
-     *
      * @param startIndex
      * @param endIndex
      * @param arr
      * @param elem
      * @return first element index in array
-     *
-     *
+     * <p>
      * Binary Search to find last element index in array; ~O(LogN) time complexity
      */
 
