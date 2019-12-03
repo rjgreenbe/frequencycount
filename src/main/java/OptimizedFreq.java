@@ -45,24 +45,31 @@ public class OptimizedFreq {
     private static Logger log = LoggerFactory.getLogger(OptimizedFreq.class);
 
     public static void main(String... args) {
+        String dataFile = "data.txt";
         try {
-            processDataFile();
+            processDataFile(dataFile);
         } catch (FileNotFoundException e) {
+            log.error("file {} not found" + dataFile);
             e.printStackTrace();
         } catch (Exception e) {
+            log.error("Unknown exception caught");
             e.printStackTrace();
         }
     }
 
-    static private void processDataFile() throws FileNotFoundException {
-        File inputFile = new File("data.txt");
+    /**
+     *
+     * @param dataFile
+     * @throws FileNotFoundException
+     *
+     * Input data from file and insert into array for processing
+     */
+    static private void processDataFile(String dataFile) throws FileNotFoundException {
+        File inputFile = new File(dataFile);
         final Scanner scanner = new Scanner(inputFile);
-
-        String nextLine = null;
         // Collect values from data file and store in array
-        int i = 0;
         while (scanner.hasNext()) {
-            nextLine = scanner.nextLine();
+            String nextLine = scanner.nextLine();
             log.info("computing frequency counts for {}", nextLine);
             String[] arr = nextLine.split(",");
             String[] newArray = new String[arr.length];
@@ -90,9 +97,16 @@ public class OptimizedFreq {
         }
     }
 
-    /*
-     This is an O(LogN) comparison time complexity. It uses the fact that each character presented to the array
-     to get its frequency count will have its length be its lastIndex - firstIndex + 1.
+    /**
+     *
+     * @param startIndex
+     * @param endIndex
+     * @param arr
+     * @param element
+     * @return frequency count of element
+     *
+     * This is an O(LogN) comparison time complexity. It uses the fact that each character presented to the array
+     * to get its frequency count will have its length be its lastIndex - firstIndex + 1.
      */
 
     public static Integer processRecursive(Integer startIndex, Integer endIndex, String arr[], String element) {
@@ -104,24 +118,44 @@ public class OptimizedFreq {
             lastIndex = OptimizedFreq.findLastIndex(startIndex, endIndex, arr, element);
             firstIndex = OptimizedFreq.findFirstIndex(startIndex, endIndex, arr, element);
         }
-        return lastIndex - firstIndex + 1;
+
+        return lastIndex != -1 ? lastIndex - firstIndex + 1 : -1;
     }
 
-    /*
-     This is an O(n) function in terms of time complexity - worst case
-     is when array has all same element duplicated we have to do a full N comparisons.
+    /**
+     *
+     * @param arr
+     * @param element
+     * @return
+     *
+     *
+     * This is an O(n) function in terms of time complexity - worst case
+     * is when array has all same element duplicated we have to do a full N comparisons.
      */
     public static Integer processImperative(String arr[], String element) {
         int count = 0;
-        for (String s1 : arr) {
+        for (Comparable<String> s1 : arr) {
             if (s1.equals(element)) count++;
+            // if we are traversing elements that are lexicographically greater then the element
+            // we are searching for, because the array is sorted, we will no longer encounter
+            // that element, and we can stop iterating through loop.
             else if (s1.compareTo(element) > 0) break;
         }
         return count;
     }
-    /*
-     * Binary Search to find first element index in list; O(LogN) time
+
+    /**
+     *
+     * @param startIndex
+     * @param endIndex
+     * @param arr
+     * @param elem
+     * @return first element index in array
+     *
+     *
+     * Binary Search to find first element index in array; ~O(LogN) time complexity
      */
+
     private static Integer findFirstIndex(int startIndex, int endIndex, String[] arr, Comparable<String> elem) {
         if (startIndex <= endIndex) {
             int mid = (endIndex + startIndex) / 2;
@@ -144,9 +178,18 @@ public class OptimizedFreq {
         return -1;
     }
 
-    /*
-    * Binary Search to find first last element index in list; O(LogN) time
-    */
+    /**
+     *
+     * @param startIndex
+     * @param endIndex
+     * @param arr
+     * @param elem
+     * @return first element index in array
+     *
+     *
+     * Binary Search to find last element index in array; ~O(LogN) time complexity
+     */
+
     private static Integer findLastIndex(int startIndex, int endIndex, String[] arr, Comparable<String> elem) {
         if (startIndex <= endIndex) {
             int mid = (endIndex + startIndex) / 2;
