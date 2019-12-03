@@ -1,13 +1,41 @@
+import org.eclipse.collections.api.LazyIterable;
+import org.eclipse.collections.api.RichIterable;
+import org.eclipse.collections.api.bag.MutableBag;
+import org.eclipse.collections.api.bag.sorted.MutableSortedBag;
+import org.eclipse.collections.api.bimap.MutableBiMap;
+import org.eclipse.collections.api.block.function.Function;
+import org.eclipse.collections.api.block.function.Function0;
+import org.eclipse.collections.api.block.function.Function2;
+import org.eclipse.collections.api.block.function.Function3;
+import org.eclipse.collections.api.block.function.primitive.*;
+import org.eclipse.collections.api.block.predicate.Predicate;
+import org.eclipse.collections.api.block.predicate.Predicate2;
+import org.eclipse.collections.api.block.procedure.Procedure;
+import org.eclipse.collections.api.block.procedure.Procedure2;
+import org.eclipse.collections.api.block.procedure.primitive.ObjectIntProcedure;
+import org.eclipse.collections.api.collection.primitive.*;
+import org.eclipse.collections.api.list.MutableList;
+import org.eclipse.collections.api.map.MutableMap;
+import org.eclipse.collections.api.map.MutableMapIterable;
+import org.eclipse.collections.api.map.primitive.MutableObjectDoubleMap;
+import org.eclipse.collections.api.map.primitive.MutableObjectLongMap;
+import org.eclipse.collections.api.map.sorted.MutableSortedMap;
+import org.eclipse.collections.api.multimap.MutableMultimap;
+import org.eclipse.collections.api.multimap.set.MutableSetMultimap;
+import org.eclipse.collections.api.partition.set.PartitionMutableSet;
+import org.eclipse.collections.api.set.*;
+import org.eclipse.collections.api.set.primitive.*;
+import org.eclipse.collections.api.set.sorted.MutableSortedSet;
+import org.eclipse.collections.api.tuple.Pair;
+import org.eclipse.collections.api.tuple.Twin;
+import org.eclipse.collections.impl.list.mutable.FastList;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Scanner;
-import java.util.Set;
-
+import java.util.*;
+import java.util.concurrent.ExecutorService;
 
 /**
  * R Greenberg. 732.742.4792; count frequency for all array elements in sorted order.
@@ -31,11 +59,8 @@ public class OptimizedFreq {
         final Scanner scanner = new Scanner(inputFile);
 
         String nextLine = null;
-
         // Collect values from data file and store in array
-
         int i = 0;
-
         while (scanner.hasNext()) {
             nextLine = scanner.nextLine();
             log.info("computing frequency counts for {}", nextLine);
@@ -43,7 +68,7 @@ public class OptimizedFreq {
             String[] newArray = new String[arr.length];
             System.arraycopy(arr, 0, newArray, 0, arr.length);
             Arrays.sort(newArray);
-            Set<Comparable<? super String>> processed = new HashSet<>();
+            List<Comparable<? super String>> processed = FastList.newList();
             processed.clear();
             log.info("**** Starting recursive count computation ****");
             // uses the logic that length( repeating character in a sorted list) = lastIndex - firstIndex + 1)
@@ -54,7 +79,6 @@ public class OptimizedFreq {
                     processed.add(val);
                 }
             }
-
             processed.clear();
             log.info("**** Starting iterative count computation ****");
             for (String val : newArray)
@@ -95,9 +119,8 @@ public class OptimizedFreq {
         }
         return count;
     }
-
     /*
-      Binary Search to find first element index in list; O(LogN) time
+     * Binary Search to find first element index in list; O(LogN) time
      */
     private static Integer findFirstIndex(int startIndex, int endIndex, String[] arr, Comparable<String> elem) {
         if (startIndex <= endIndex) {
@@ -122,7 +145,7 @@ public class OptimizedFreq {
     }
 
     /*
-     Binary Search to find first last element index in list; O(LogN) time
+    * Binary Search to find first last element index in list; O(LogN) time
     */
     private static Integer findLastIndex(int startIndex, int endIndex, String[] arr, Comparable<String> elem) {
         if (startIndex <= endIndex) {
