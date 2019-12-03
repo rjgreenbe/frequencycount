@@ -47,7 +47,7 @@ public class OptimizedFreq {
             // uses the logic that length( repeating character in a sorted list) = lastIndex - firstIndex + 1)
             for (String val : newArray) {
                 if (!processed.contains(val)) {
-                    Integer frequencyCount = OptimizedFreq.processRecursive(0, newArray.length - 1, newArray, val);
+                    Integer frequencyCount = OptimizedFreq.processBinarySearch(0, newArray.length - 1, newArray, val);
                     log.info("Frequency of {} is : {}", val, frequencyCount);
                     processed.add(val);
                 }
@@ -74,7 +74,7 @@ public class OptimizedFreq {
      * to get its frequency count will have its length be its lastIndex - firstIndex + 1.
      */
 
-    public static Integer processRecursive(Integer startIndex, Integer endIndex, String arr[], String element) {
+    public static Integer processBinarySearch(Integer startIndex, Integer endIndex, String arr[], String element) {
         int lastIndex, firstIndex;
         if (arr[startIndex].equals(element) && arr[endIndex].equals(element)) {
             lastIndex = endIndex;
