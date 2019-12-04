@@ -1,10 +1,11 @@
 
-1. Iterative Case in computeLinear is to iterate through the array and compute the running frequencies in the list ( in O(N) time ).
-I used a map association between the element and its frequency count to store the associations between the
+1. Iterative Case (in computeLinear()) is to iterate through the array and compute the running frequencies. This
+will run in O(N) time as this approach must iterate through the list once to associate the keys with frequencies. Once
+the frequencies are computed, the actual lookup of the key in the Map implementation is constant time or O(1). I used a map association between the element and its frequency count to store the associations between the
 array elements and their frequency counts.
 
-2. The improved case is the binary search where we have Log2N * C divisions where C is a constant. So,
- in general, for computing the first and last indices, each one is Log2(n) so we have 2Log2(N) as
+2. The improved case is the binary search (processBinarySearch) where we have Log2N * C divisions of the array where C is a constant.
+So, in general, for computing the first and last indices, each one is Log2(n) so we have 2Log2(N) as
  follows:
     If Length of array = n
     At 1st recursion, we reduce the size of our active array to n/2
