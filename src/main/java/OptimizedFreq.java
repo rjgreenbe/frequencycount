@@ -7,8 +7,12 @@ import java.io.FileNotFoundException;
 import java.util.*;
 
 /**
- * R Greenberg. 732.742.4792; count frequency for all array elements in sorted order.
+ * R Greenberg (732.742.4792)
+ * Given a sorted array of N elements, count frequency for all array elements
+ * allowing for duplicates.
+ *
  */
+
 public class OptimizedFreq {
     private static final int MaxSize = 1000;        // Make it a sufficient size 
     private static Logger log = LoggerFactory.getLogger(OptimizedFreq.class);
@@ -95,7 +99,8 @@ public class OptimizedFreq {
      * @param endIndex
      * @param arr
      * @param element
-     * @return This is an O(n) function in terms of time complexity - worst case
+     * @return frequency count of the element
+     * This is an O(n) function in terms of time complexity - worst case
      * is when array has all same element duplicated we have to do a full N comparisons.
      */
 
@@ -155,7 +160,7 @@ public class OptimizedFreq {
      * @param endIndex
      * @param arr
      * @param elem
-     * @return first element index in array
+     * @return last element index in array
      * <p>
      * Binary Search to find last element index in array; ~O(LogN) time complexity
      */
