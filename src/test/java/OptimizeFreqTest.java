@@ -1,6 +1,7 @@
 import junit.framework.TestCase;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.junit.jupiter.api.Test;
+
 import java.util.*;
 
 /**
@@ -20,7 +21,7 @@ public class OptimizeFreqTest extends TestCase {
         arr = new String[MaxSize];
         pList = new String[chars.length()];
 
-        for( int i = 0; i < chars.length(); i++) {
+        for (int i = 0; i < chars.length(); i++) {
             char c = chars.charAt(i);
             pList[i] = String.valueOf(c);
         }
@@ -44,8 +45,8 @@ public class OptimizeFreqTest extends TestCase {
         init();
         Set<String> sSet = new TreeSet<>();
         Map<String, Integer> countMap = new UnifiedMap<>();
-        for( String p : pList) {
-            if(!sSet.contains(p)) {
+        for (String p : pList) {
+            if (!sSet.contains(p)) {
                 System.out.println("p = " + p);
                 Integer count1 = OptimizedFreq.processBinarySearch(0, MaxSize - 1, arr, p);
                 Integer count2 = OptimizedFreq.processImperative(0, arr.length - 1, arr, p, countMap);

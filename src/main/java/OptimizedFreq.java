@@ -1,7 +1,4 @@
 import org.eclipse.collections.impl.list.mutable.FastList;
-
-
-import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -12,8 +9,8 @@ import java.util.*;
 /**
  * R Greenberg (732.742.4792)
  * Given a sorted array of N elements, count frequency for all array elements
- * allowing for duplicates.
- *
+ * allowing for duplicates. Implementations are linear search and binary search
+ * approaches to solve the problem.
  */
 
 public class OptimizedFreq {
@@ -37,6 +34,7 @@ public class OptimizedFreq {
      * @param dataFile
      * @throws FileNotFoundException Input data from file and insert into array for processing
      */
+
     static private void processDataFile(String dataFile) throws FileNotFoundException {
         File inputFile = new File(dataFile);
         final Scanner scanner = new Scanner(inputFile);
@@ -125,9 +123,8 @@ public class OptimizedFreq {
                     // if we are traversing elements that are lexicographically greater then the element
                     // we are searching for, because the array is sorted, we will no longer encounter
                     // that element, and we can stop iterating through loop.
-                }
-                else if (s1.compareTo(element) > 0) break;
-             }
+                } else if (s1.compareTo(element) > 0) break;
+            }
         return countMap.get(element);
     }
 
