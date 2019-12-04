@@ -1,4 +1,7 @@
 import org.eclipse.collections.impl.list.mutable.FastList;
+
+
+import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -45,6 +48,7 @@ public class OptimizedFreq {
 
             Arrays.sort(arr);
             List<Comparable<? super String>> processed = FastList.newList();
+
             processed.clear();
             log.info("**** Starting recursive count computation ****");
             // uses the logic that length( repeating character in a sorted list) = lastIndex - firstIndex + 1)
@@ -56,11 +60,12 @@ public class OptimizedFreq {
                 }
             }
             processed.clear();
+            Map<String, Integer> countMap = new HashMap<>();
             log.info("**** Starting iterative count computation ****");
             for (String val : arr)
                 if (!processed.contains(val)) {
                     log.info("Frequency of {} is : {}", val,
-                            OptimizedFreq.processImperative(0, arr.length - 1, arr, val));
+                            OptimizedFreq.processImperative(0, arr.length - 1, arr, val, countMap));
                     processed.add(val);
                 }
         }
@@ -104,23 +109,26 @@ public class OptimizedFreq {
      * is when array has all same element duplicated we have to do a full N comparisons.
      */
 
-    public static Integer processImperative(int startIndex, int endIndex, String arr[], String element) {
+    public static Integer processImperative(int startIndex, int endIndex, String arr[], String element, Map<String, Integer> countMap) {
         int count = 0;
-
         // Optimization: If entire array segment is one element, we can just take the
         // difference of the indices to get the count.
 
         if (arr[startIndex].equals(element) && arr[endIndex].equals(element)) {
             count = endIndex - startIndex + 1;
+            countMap.put(element, count);
         } else
             for (Comparable<String> s1 : arr) {
-                if (s1.equals(element)) count++;
-                // if we are traversing elements that are lexicographically greater then the element
-                // we are searching for, because the array is sorted, we will no longer encounter
-                // that element, and we can stop iterating through loop.
+                if (s1.equals(element)) {
+                    Integer freq = countMap.get(element);
+                    countMap.put(element, freq == null ? 1 : freq + 1);
+                    // if we are traversing elements that are lexicographically greater then the element
+                    // we are searching for, because the array is sorted, we will no longer encounter
+                    // that element, and we can stop iterating through loop.
+                }
                 else if (s1.compareTo(element) > 0) break;
              }
-        return count;
+        return countMap.get(element);
     }
 
     /**

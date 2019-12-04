@@ -1,9 +1,11 @@
 import junit.framework.TestCase;
+import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.junit.jupiter.api.Test;
 import java.util.*;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
+/**
+ * Junit for frequency count problem
+ */
 public class OptimizeFreqTest extends TestCase {
     private final static int MaxSize = 1000;
     private static String chars = "abcdefghijklmnopqrstuvwxyz";
@@ -40,13 +42,13 @@ public class OptimizeFreqTest extends TestCase {
     @Test
     public void test1() {
         init();
-
         Set<String> sSet = new TreeSet<>();
-        int i = 0;
+        Map<String, Integer> countMap = new UnifiedMap<>();
         for( String p : pList) {
             if(!sSet.contains(p)) {
-                Integer count1 = OptimizedFreq.processBinarySearch(0, MaxSize - 1, arr, pList[i]);
-                Integer count2 = OptimizedFreq.processImperative(0, arr.length - 1, arr, pList[i]);
+                System.out.println("p = " + p);
+                Integer count1 = OptimizedFreq.processBinarySearch(0, MaxSize - 1, arr, p);
+                Integer count2 = OptimizedFreq.processImperative(0, arr.length - 1, arr, p, countMap);
                 assertEquals(count1, count2);
                 sSet.add(p);
             }
