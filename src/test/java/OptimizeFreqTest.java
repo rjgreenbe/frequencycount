@@ -40,13 +40,16 @@ public class OptimizeFreqTest extends TestCase {
     @Test
     public void test1() {
         init();
+
         Set<String> sSet = new TreeSet<>();
-        sSet.addAll(Arrays.asList(pList));
         int i = 0;
         for( String p : pList) {
-            Integer count1 = OptimizedFreq.processBinarySearch(0, MaxSize - 1, arr, pList[i]);
-            Integer count2 = OptimizedFreq.processImperative(0, arr.length -1, arr, pList[i]);
-            assertEquals(count1, count2);
+            if(!sSet.contains(p)) {
+                Integer count1 = OptimizedFreq.processBinarySearch(0, MaxSize - 1, arr, pList[i]);
+                Integer count2 = OptimizedFreq.processImperative(0, arr.length - 1, arr, pList[i]);
+                assertEquals(count1, count2);
+                sSet.add(p);
+            }
         }
     }
 
