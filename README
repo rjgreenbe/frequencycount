@@ -4,7 +4,7 @@ fact that array is sorted) that breaks out of the loop if we encounter a number 
 In the worst case we will still do N comparisons. For example, when N=4 and entire array is same element, this degenerates
 into 4 comparisons.
 
-2. The improved case is the binary search where we have LogN + O(C) recursive calls where C is a constant. So,
+2. The improved case is the binary search where we have Log2N + C divisions where C is a constant. So,
  in general, for computing the first and last indices, each one is Log2(n) so we have 2Log2(N) as
  follows:
     If Length of array = n
@@ -22,7 +22,7 @@ into 4 comparisons.
  => log2 (n) = log2 (2^k)
  => log2 (n) = k log2 (2)
 Therefore k = log2 (n)
-~O(log2(N)
+O(log2(N)) for each search.
 
 The following is a snapshot of the data collected from both the iterative and binary search
 solutions to this problem.

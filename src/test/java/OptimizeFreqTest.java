@@ -45,7 +45,7 @@ public class OptimizeFreqTest extends TestCase {
         int i = 0;
         for( String p : pList) {
             Integer count1 = OptimizedFreq.processBinarySearch(0, MaxSize - 1, arr, pList[i]);
-            Integer count2 = OptimizedFreq.processImperative(arr, pList[i]);
+            Integer count2 = OptimizedFreq.processImperative(0, arr.length -1, arr, pList[i]);
             assertEquals(count1, count2);
         }
     }
