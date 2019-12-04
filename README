@@ -1,8 +1,7 @@
 
-1. Imperative Case is a linear search which is O(N) in the worst case. There is an optimization (that uses the
-fact that array is sorted) that breaks out of the loop if we encounter a number in the array that is greater than the element desired.
-In the worst case we will still do N comparisons. For example, when N=4 and entire array is same element, this degenerates
-into 4 comparisons. I used a map association between the element and its frequency count.
+1. Iterative Case in computeLinear is to iterate through the array and compute the running frequencies in the list ( in O(N) time ).
+I used a map association between the element and its frequency count to store the associations between the
+array elements and their frequency counts.
 
 2. The improved case is the binary search where we have Log2N * C divisions where C is a constant. So,
  in general, for computing the first and last indices, each one is Log2(n) so we have 2Log2(N) as
@@ -21,239 +20,236 @@ into 4 comparisons. I used a map association between the element and its frequen
  Applying log function on both sides:
  => log2 (n) = log2 (2^k)
  => log2 (n) = k log2 (2)
-Therefore k = log2 (n)
+Therefore k = log2(n)
 O(log2(N)) for each search.
 
 The following is a snapshot of the data collected from both the iterative and binary search
 solutions to this problem.
 
-8:00:33 AM: Executing task 'OptimizedFreq.main()'...
+6:34:27 AM: Executing task 'OptimizedFreq.main()'...
 
-Starting Gradle Daemon...
-Gradle Daemon started in 1 s 152 ms
-> Task :compileJava UP-TO-DATE
+> Task :compileJava
 > Task :processResources NO-SOURCE
-> Task :classes UP-TO-DATE
+> Task :classes
 
 > Task :OptimizedFreq.main()
-08:00:38.513 [main] INFO  OptimizedFreq - computing frequency counts for a,b,b,b,b,b,d,h,h,h,p
-08:00:38.885 [main] INFO  OptimizedFreq - **** Starting recursive count computation ****
-08:00:38.888 [main] INFO  OptimizedFreq - Frequency of a is : 1
-08:00:38.899 [main] INFO  OptimizedFreq - Frequency of b is : 5
-08:00:38.900 [main] INFO  OptimizedFreq - Frequency of d is : 1
-08:00:38.903 [main] INFO  OptimizedFreq - Frequency of h is : 3
-08:00:38.904 [main] INFO  OptimizedFreq - Frequency of p is : 1
-08:00:38.905 [main] INFO  OptimizedFreq - **** Starting iterative count computation ****
-08:00:38.906 [main] INFO  OptimizedFreq - Frequency of a is : 1
-08:00:38.906 [main] INFO  OptimizedFreq - Frequency of b is : 5
-08:00:38.907 [main] INFO  OptimizedFreq - Frequency of d is : 1
-08:00:38.907 [main] INFO  OptimizedFreq - Frequency of h is : 3
-08:00:38.908 [main] INFO  OptimizedFreq - Frequency of p is : 1
-08:00:38.908 [main] INFO  OptimizedFreq - computing frequency counts for 1,1,1,1,1,1,1,1,1,1,1,1,1,1
-08:00:38.909 [main] INFO  OptimizedFreq - **** Starting recursive count computation ****
-08:00:38.909 [main] INFO  OptimizedFreq - Frequency of 1 is : 14
-08:00:38.909 [main] INFO  OptimizedFreq - **** Starting iterative count computation ****
-08:00:38.910 [main] INFO  OptimizedFreq - Frequency of 1 is : 14
-08:00:38.910 [main] INFO  OptimizedFreq - computing frequency counts for 2,3,4,5,6,1,1,1,1,1,1,2,2,2
-08:00:38.910 [main] INFO  OptimizedFreq - **** Starting recursive count computation ****
-08:00:38.911 [main] INFO  OptimizedFreq - Frequency of 1 is : 6
-08:00:38.911 [main] INFO  OptimizedFreq - Frequency of 2 is : 4
-08:00:38.912 [main] INFO  OptimizedFreq - Frequency of 3 is : 1
-08:00:38.912 [main] INFO  OptimizedFreq - Frequency of 4 is : 1
-08:00:38.914 [main] INFO  OptimizedFreq - Frequency of 5 is : 1
-08:00:38.914 [main] INFO  OptimizedFreq - Frequency of 6 is : 1
-08:00:38.915 [main] INFO  OptimizedFreq - **** Starting iterative count computation ****
-08:00:38.915 [main] INFO  OptimizedFreq - Frequency of 1 is : 6
-08:00:38.915 [main] INFO  OptimizedFreq - Frequency of 2 is : 4
-08:00:38.916 [main] INFO  OptimizedFreq - Frequency of 3 is : 1
-08:00:38.916 [main] INFO  OptimizedFreq - Frequency of 4 is : 1
-08:00:38.916 [main] INFO  OptimizedFreq - Frequency of 5 is : 1
-08:00:38.917 [main] INFO  OptimizedFreq - Frequency of 6 is : 1
-08:00:38.918 [main] INFO  OptimizedFreq - computing frequency counts for 100,100,100,100,99,98,97,95,96,94,93,92,91,90,90,89,89,89,a,b,c,d,e,f,f,g,g,g,g,h,g,g,g,g,h,h,h,h,h,h,h,h,h,h,h,h,h,h,h,h,h,h,h,h,h,h,h,h,h,h,i,i,i,i,i,i,i,8,8,8,8,8,8,7,7,7,7
-08:00:38.920 [main] INFO  OptimizedFreq - **** Starting recursive count computation ****
-08:00:38.920 [main] INFO  OptimizedFreq - Frequency of 100 is : 4
-08:00:38.921 [main] INFO  OptimizedFreq - Frequency of 7 is : 4
-08:00:38.921 [main] INFO  OptimizedFreq - Frequency of 8 is : 6
-08:00:38.921 [main] INFO  OptimizedFreq - Frequency of 89 is : 3
-08:00:38.922 [main] INFO  OptimizedFreq - Frequency of 90 is : 2
-08:00:38.922 [main] INFO  OptimizedFreq - Frequency of 91 is : 1
-08:00:38.922 [main] INFO  OptimizedFreq - Frequency of 92 is : 1
-08:00:38.923 [main] INFO  OptimizedFreq - Frequency of 93 is : 1
-08:00:38.927 [main] INFO  OptimizedFreq - Frequency of 94 is : 1
-08:00:38.927 [main] INFO  OptimizedFreq - Frequency of 95 is : 1
-08:00:38.928 [main] INFO  OptimizedFreq - Frequency of 96 is : 1
-08:00:38.928 [main] INFO  OptimizedFreq - Frequency of 97 is : 1
-08:00:38.929 [main] INFO  OptimizedFreq - Frequency of 98 is : 1
-08:00:38.929 [main] INFO  OptimizedFreq - Frequency of 99 is : 1
-08:00:38.930 [main] INFO  OptimizedFreq - Frequency of a is : 1
-08:00:38.930 [main] INFO  OptimizedFreq - Frequency of b is : 1
-08:00:38.931 [main] INFO  OptimizedFreq - Frequency of c is : 1
-08:00:38.931 [main] INFO  OptimizedFreq - Frequency of d is : 1
-08:00:38.931 [main] INFO  OptimizedFreq - Frequency of e is : 1
-08:00:38.932 [main] INFO  OptimizedFreq - Frequency of f is : 2
-08:00:38.932 [main] INFO  OptimizedFreq - Frequency of g is : 8
-08:00:38.933 [main] INFO  OptimizedFreq - Frequency of h is : 27
-08:00:38.933 [main] INFO  OptimizedFreq - Frequency of i is : 7
-08:00:38.934 [main] INFO  OptimizedFreq - **** Starting iterative count computation ****
-08:00:38.934 [main] INFO  OptimizedFreq - Frequency of 100 is : 4
-08:00:38.935 [main] INFO  OptimizedFreq - Frequency of 7 is : 4
-08:00:38.935 [main] INFO  OptimizedFreq - Frequency of 8 is : 6
-08:00:38.935 [main] INFO  OptimizedFreq - Frequency of 89 is : 3
-08:00:38.937 [main] INFO  OptimizedFreq - Frequency of 90 is : 2
-08:00:38.939 [main] INFO  OptimizedFreq - Frequency of 91 is : 1
-08:00:38.939 [main] INFO  OptimizedFreq - Frequency of 92 is : 1
-08:00:38.940 [main] INFO  OptimizedFreq - Frequency of 93 is : 1
-08:00:38.940 [main] INFO  OptimizedFreq - Frequency of 94 is : 1
-08:00:38.941 [main] INFO  OptimizedFreq - Frequency of 95 is : 1
-08:00:38.941 [main] INFO  OptimizedFreq - Frequency of 96 is : 1
-08:00:38.941 [main] INFO  OptimizedFreq - Frequency of 97 is : 1
-08:00:38.942 [main] INFO  OptimizedFreq - Frequency of 98 is : 1
-08:00:38.942 [main] INFO  OptimizedFreq - Frequency of 99 is : 1
-08:00:38.942 [main] INFO  OptimizedFreq - Frequency of a is : 1
-08:00:38.942 [main] INFO  OptimizedFreq - Frequency of b is : 1
-08:00:38.942 [main] INFO  OptimizedFreq - Frequency of c is : 1
-08:00:38.942 [main] INFO  OptimizedFreq - Frequency of d is : 1
-08:00:38.942 [main] INFO  OptimizedFreq - Frequency of e is : 1
-08:00:38.942 [main] INFO  OptimizedFreq - Frequency of f is : 2
-08:00:38.943 [main] INFO  OptimizedFreq - Frequency of g is : 8
-08:00:38.943 [main] INFO  OptimizedFreq - Frequency of h is : 27
-08:00:38.945 [main] INFO  OptimizedFreq - Frequency of i is : 7
-08:00:38.948 [main] INFO  OptimizedFreq - computing frequency counts for a,ab,c,de,ff,gg,hhh,gg,1,2,3,4,5,6,7,8,9,a,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,d,d,d,d,d,e,e,e,e,e,aaa,bb,11,22,33,44,55,66,77,88,99,100,102,103,104,106,107,108,109,110
-08:00:38.948 [main] INFO  OptimizedFreq - **** Starting recursive count computation ****
-08:00:38.948 [main] INFO  OptimizedFreq - Frequency of 1 is : 1
-08:00:38.948 [main] INFO  OptimizedFreq - Frequency of 100 is : 1
-08:00:38.948 [main] INFO  OptimizedFreq - Frequency of 102 is : 1
-08:00:38.949 [main] INFO  OptimizedFreq - Frequency of 103 is : 1
-08:00:38.949 [main] INFO  OptimizedFreq - Frequency of 104 is : 1
-08:00:38.949 [main] INFO  OptimizedFreq - Frequency of 106 is : 1
-08:00:38.949 [main] INFO  OptimizedFreq - Frequency of 107 is : 1
-08:00:38.949 [main] INFO  OptimizedFreq - Frequency of 108 is : 1
-08:00:38.949 [main] INFO  OptimizedFreq - Frequency of 109 is : 1
-08:00:38.949 [main] INFO  OptimizedFreq - Frequency of 11 is : 1
-08:00:38.949 [main] INFO  OptimizedFreq - Frequency of 110 is : 1
-08:00:38.949 [main] INFO  OptimizedFreq - Frequency of 2 is : 1
-08:00:38.949 [main] INFO  OptimizedFreq - Frequency of 22 is : 1
-08:00:38.950 [main] INFO  OptimizedFreq - Frequency of 3 is : 1
-08:00:38.950 [main] INFO  OptimizedFreq - Frequency of 33 is : 1
-08:00:38.950 [main] INFO  OptimizedFreq - Frequency of 4 is : 1
-08:00:38.950 [main] INFO  OptimizedFreq - Frequency of 44 is : 1
-08:00:38.950 [main] INFO  OptimizedFreq - Frequency of 5 is : 1
-08:00:38.950 [main] INFO  OptimizedFreq - Frequency of 55 is : 1
-08:00:38.950 [main] INFO  OptimizedFreq - Frequency of 6 is : 1
-08:00:38.950 [main] INFO  OptimizedFreq - Frequency of 66 is : 1
-08:00:38.950 [main] INFO  OptimizedFreq - Frequency of 7 is : 1
-08:00:38.950 [main] INFO  OptimizedFreq - Frequency of 77 is : 1
-08:00:38.950 [main] INFO  OptimizedFreq - Frequency of 8 is : 1
-08:00:38.950 [main] INFO  OptimizedFreq - Frequency of 88 is : 1
-08:00:38.950 [main] INFO  OptimizedFreq - Frequency of 9 is : 1
-08:00:38.950 [main] INFO  OptimizedFreq - Frequency of 99 is : 1
-08:00:38.950 [main] INFO  OptimizedFreq - Frequency of a is : 2
-08:00:38.950 [main] INFO  OptimizedFreq - Frequency of aaa is : 1
-08:00:38.951 [main] INFO  OptimizedFreq - Frequency of ab is : 1
-08:00:38.951 [main] INFO  OptimizedFreq - Frequency of bb is : 1
-08:00:38.951 [main] INFO  OptimizedFreq - Frequency of c is : 53
-08:00:38.951 [main] INFO  OptimizedFreq - Frequency of d is : 5
-08:00:38.951 [main] INFO  OptimizedFreq - Frequency of de is : 1
-08:00:38.951 [main] INFO  OptimizedFreq - Frequency of e is : 5
-08:00:38.951 [main] INFO  OptimizedFreq - Frequency of ff is : 1
-08:00:38.951 [main] INFO  OptimizedFreq - Frequency of gg is : 2
-08:00:38.951 [main] INFO  OptimizedFreq - Frequency of hhh is : 1
-08:00:38.951 [main] INFO  OptimizedFreq - **** Starting iterative count computation ****
-08:00:38.951 [main] INFO  OptimizedFreq - Frequency of 1 is : 1
-08:00:38.951 [main] INFO  OptimizedFreq - Frequency of 100 is : 1
-08:00:38.951 [main] INFO  OptimizedFreq - Frequency of 102 is : 1
-08:00:38.951 [main] INFO  OptimizedFreq - Frequency of 103 is : 1
-08:00:38.951 [main] INFO  OptimizedFreq - Frequency of 104 is : 1
-08:00:38.951 [main] INFO  OptimizedFreq - Frequency of 106 is : 1
-08:00:38.951 [main] INFO  OptimizedFreq - Frequency of 107 is : 1
-08:00:38.951 [main] INFO  OptimizedFreq - Frequency of 108 is : 1
-08:00:38.952 [main] INFO  OptimizedFreq - Frequency of 109 is : 1
-08:00:38.952 [main] INFO  OptimizedFreq - Frequency of 11 is : 1
-08:00:38.952 [main] INFO  OptimizedFreq - Frequency of 110 is : 1
-08:00:38.952 [main] INFO  OptimizedFreq - Frequency of 2 is : 1
-08:00:38.952 [main] INFO  OptimizedFreq - Frequency of 22 is : 1
-08:00:38.952 [main] INFO  OptimizedFreq - Frequency of 3 is : 1
-08:00:38.952 [main] INFO  OptimizedFreq - Frequency of 33 is : 1
-08:00:38.952 [main] INFO  OptimizedFreq - Frequency of 4 is : 1
-08:00:38.952 [main] INFO  OptimizedFreq - Frequency of 44 is : 1
-08:00:38.952 [main] INFO  OptimizedFreq - Frequency of 5 is : 1
-08:00:38.952 [main] INFO  OptimizedFreq - Frequency of 55 is : 1
-08:00:38.952 [main] INFO  OptimizedFreq - Frequency of 6 is : 1
-08:00:38.952 [main] INFO  OptimizedFreq - Frequency of 66 is : 1
-08:00:38.952 [main] INFO  OptimizedFreq - Frequency of 7 is : 1
-08:00:38.952 [main] INFO  OptimizedFreq - Frequency of 77 is : 1
-08:00:38.952 [main] INFO  OptimizedFreq - Frequency of 8 is : 1
-08:00:38.952 [main] INFO  OptimizedFreq - Frequency of 88 is : 1
-08:00:38.952 [main] INFO  OptimizedFreq - Frequency of 9 is : 1
-08:00:38.952 [main] INFO  OptimizedFreq - Frequency of 99 is : 1
-08:00:38.952 [main] INFO  OptimizedFreq - Frequency of a is : 2
-08:00:38.952 [main] INFO  OptimizedFreq - Frequency of aaa is : 1
-08:00:38.952 [main] INFO  OptimizedFreq - Frequency of ab is : 1
-08:00:38.953 [main] INFO  OptimizedFreq - Frequency of bb is : 1
-08:00:38.953 [main] INFO  OptimizedFreq - Frequency of c is : 53
-08:00:38.953 [main] INFO  OptimizedFreq - Frequency of d is : 5
-08:00:38.953 [main] INFO  OptimizedFreq - Frequency of de is : 1
-08:00:38.953 [main] INFO  OptimizedFreq - Frequency of e is : 5
-08:00:38.953 [main] INFO  OptimizedFreq - Frequency of ff is : 1
-08:00:38.953 [main] INFO  OptimizedFreq - Frequency of gg is : 2
-08:00:38.953 [main] INFO  OptimizedFreq - Frequency of hhh is : 1
-08:00:38.966 [main] INFO  OptimizedFreq - computing frequency counts for k,r,s,z,t,y,c,x,o,a,n,w,d,m,o,l,a,a,q,q,g,o,a,x,i,j,c,s,d,h,y,l,s,d,c,o,z,u,d,w,d,f,g,v,r,z,k,k,v,e,a,g,n,u,k,o,g,w,p,z,t,a,r,a,h,d,b,w,x,y,v,q,t,p,y,e,v,x,q,m,k,d,l,o,i,v,f,x,h,l,v,w,d,d,v,b,q,u,x,p,u,x,s,p,v,v,g,e,y,u,k,o,i,w,m,g,n,d,r,v,m,o,h,t,n,w,e,m,l,s,l,c,c,d,r,d,y,h,v,e,c,x,m,m,e,t,s,d,r,k,z,i,l,a,h,r,x,r,q,a,n,r,u,n,b,v,i,h,l,i,d,h,f,q,x,r,v,v,p,n,g,j,w,p,l,z,b,f,d,f,y,v,t,r,r,a,l,o,h,o,x,l,b,a,t,b,m,r,p,r,o,b,o,d,d,e,w,u,g,u,b,j,n,u,e,i,p,y,a,k,h,u,o,q,g,a,c,v,y,v,f,x,s,r,t,y,i,n,y,u,q,c,y,n,f,p,d,o,m,a,k,p,e,w,z,i,i,k,f,b,r,x,n,r,z,o,w,w,t,p,w,p,l,m,q,u,i,y,s,u,g,j,z,j,e,o,r,z,i,n,k,p,i,f,j,c,m,a,x,x,u,o,w,h,n,b,v,q,y,p,m,m,i,w,y,z,s,g,f,m,p,i,r,b,c,j,j,b,c,c,x,k,s,h,h,h,d,o,z,n,d,l,p,f,p,b,f,b,y,j,m,q,y,w,g,h,t,j,a,x,e,m,r,e,w,h,p,a,o,t,g,g,a,d,v,s,k,r,c,p,k,t,g,h,v,s,k,a,h,v,o,y,e,l,w,r,v,q,m,i,t,n,j,y,b,q,q,z,m,k,w,c,z,n,c,j,l,f,r,r,l,p,m,u,m,w,x,f,j,n,d,c,w,e,o,x,d,z,y,t,v,h,e,v,r,b,d,z,x,z,i,c,w,l,s,i,q,s,g,n,m,n,w,f,k,j,p,h,m,i,c,n,c,y,k,h,w,z,s,q,d,x,i,n,y,z,s,p,l,s,m,m,w,m,o,j,c,d,i,t,g,h,m,j,c,i,v,f,a,d,s,i,i,t,b,b,r,j,t,p,v,f,h,o,b,o,v,w,o,m,v,f,w,a,x,r,p,f,j,r,q,l,l,u,l,y,h,s,p,t,r,w,q,y,d,p,w,f,q,z,v,e,y,h,s,w,w,i,u,o,a,b,m,p,s,o,a,e,p,c,e,y,r,k,x,a,k,b,r,v,u,x,g,i,t,k,k,e,f,l,a,d,x,z,a,p,g,h,s,y,p,d,m,y,f,b,j,i,z,n,u,p,d,y,n,i,b,t,o,k,j,s,n,t,i,l,p,t,c,o,q,d,d,p,r,y,m,l,f,a,g,k,u,u,c,h,j,a,g,o,c,t,o,j,c,z,b,c,t,u,n,v,c,q,l,g,k,o,p,n,l,f,l,q,g,m,m,q,t,x,i,b,l,x,m,f,e,s,u,u,c,e,g,r,j,u,n,d,n,d,o,z,o,d,q,r,i,s,e,q,b,l,q,c,g,i,a,d,d,f,n,k,n,e,o,w,q,q,c,k,t,l,u,w,d,l,x,h,f,x,z,s,g,j,s,a,n,v,x,b,o,x,e,s,k,w,z,c,d,p,w,j,m,c,k,h,y,v,f,n,u,v,n,k,v,b,y,m,w,w,r,m,y,b,p,k,d,b,i,k,l,q,u,o,k,c,v,q,o,g,o,o,k,t,z,p,u,w,y,o,f,y,y,p,v,w,p,t,z,x,i,d,b,k,z,m,r,d,m,c,s,a,s,e,f,h,r,z,k,o,a,u,o,l,e,a,g,x,a,n,k,d,n,u,v,c,u,y,j,v,h,e,j,a,d,s,x,n,b,m,c,s,u,d,q,r,i,z,m,x,o,l,a,s,q,n,q,t,m,u,u,c,p,c,j,w,l,q,m,b,o,x,z,n,s,i,r,q,h,x,l,h,f,k,v,q,i,e,p,l,j,z,i,i,o,u,g,n,s,w,a,n,f,n,r,w,f,h,f,o,d,z,y,z,o,f,o,o,k,w,z,l,q,n,q,f,i,t,j,i,m,t,u,e,q,w,d,i,v,w,n,n,g,x,a,s,z,f,x,f
-08:00:38.968 [main] INFO  OptimizedFreq - **** Starting recursive count computation ****
-08:00:38.968 [main] INFO  OptimizedFreq - Frequency of a is : 38
-08:00:38.968 [main] INFO  OptimizedFreq - Frequency of b is : 33
-08:00:38.968 [main] INFO  OptimizedFreq - Frequency of c is : 39
-08:00:38.968 [main] INFO  OptimizedFreq - Frequency of d is : 48
-08:00:38.968 [main] INFO  OptimizedFreq - Frequency of e is : 29
-08:00:38.968 [main] INFO  OptimizedFreq - Frequency of f is : 38
-08:00:38.969 [main] INFO  OptimizedFreq - Frequency of g is : 30
-08:00:38.969 [main] INFO  OptimizedFreq - Frequency of h is : 34
-08:00:38.969 [main] INFO  OptimizedFreq - Frequency of i is : 42
-08:00:38.969 [main] INFO  OptimizedFreq - Frequency of j is : 30
-08:00:38.969 [main] INFO  OptimizedFreq - Frequency of k is : 39
-08:00:38.969 [main] INFO  OptimizedFreq - Frequency of l is : 38
-08:00:38.969 [main] INFO  OptimizedFreq - Frequency of m is : 43
-08:00:38.969 [main] INFO  OptimizedFreq - Frequency of n is : 44
-08:00:38.969 [main] INFO  OptimizedFreq - Frequency of o is : 50
-08:00:38.969 [main] INFO  OptimizedFreq - Frequency of p is : 41
-08:00:38.969 [main] INFO  OptimizedFreq - Frequency of q is : 40
-08:00:38.969 [main] INFO  OptimizedFreq - Frequency of r is : 40
-08:00:38.969 [main] INFO  OptimizedFreq - Frequency of s is : 36
-08:00:38.969 [main] INFO  OptimizedFreq - Frequency of t is : 31
-08:00:38.970 [main] INFO  OptimizedFreq - Frequency of u is : 37
-08:00:38.970 [main] INFO  OptimizedFreq - Frequency of v is : 41
-08:00:38.970 [main] INFO  OptimizedFreq - Frequency of w is : 45
-08:00:38.970 [main] INFO  OptimizedFreq - Frequency of x is : 39
-08:00:38.970 [main] INFO  OptimizedFreq - Frequency of y is : 38
-08:00:38.970 [main] INFO  OptimizedFreq - Frequency of z is : 37
-08:00:38.970 [main] INFO  OptimizedFreq - **** Starting iterative count computation ****
-08:00:38.970 [main] INFO  OptimizedFreq - Frequency of a is : 38
-08:00:38.970 [main] INFO  OptimizedFreq - Frequency of b is : 33
-08:00:38.970 [main] INFO  OptimizedFreq - Frequency of c is : 39
-08:00:38.970 [main] INFO  OptimizedFreq - Frequency of d is : 48
-08:00:38.970 [main] INFO  OptimizedFreq - Frequency of e is : 29
-08:00:38.970 [main] INFO  OptimizedFreq - Frequency of f is : 38
-08:00:38.971 [main] INFO  OptimizedFreq - Frequency of g is : 30
-08:00:38.971 [main] INFO  OptimizedFreq - Frequency of h is : 34
-08:00:38.971 [main] INFO  OptimizedFreq - Frequency of i is : 42
-08:00:38.971 [main] INFO  OptimizedFreq - Frequency of j is : 30
-08:00:38.971 [main] INFO  OptimizedFreq - Frequency of k is : 39
-08:00:38.971 [main] INFO  OptimizedFreq - Frequency of l is : 38
-08:00:38.971 [main] INFO  OptimizedFreq - Frequency of m is : 43
-08:00:38.971 [main] INFO  OptimizedFreq - Frequency of n is : 44
-08:00:38.972 [main] INFO  OptimizedFreq - Frequency of o is : 50
-08:00:38.972 [main] INFO  OptimizedFreq - Frequency of p is : 41
-08:00:38.972 [main] INFO  OptimizedFreq - Frequency of q is : 40
-08:00:38.972 [main] INFO  OptimizedFreq - Frequency of r is : 40
-08:00:38.972 [main] INFO  OptimizedFreq - Frequency of s is : 36
-08:00:38.972 [main] INFO  OptimizedFreq - Frequency of t is : 31
-08:00:38.973 [main] INFO  OptimizedFreq - Frequency of u is : 37
-08:00:38.973 [main] INFO  OptimizedFreq - Frequency of v is : 41
-08:00:38.973 [main] INFO  OptimizedFreq - Frequency of w is : 45
-08:00:38.973 [main] INFO  OptimizedFreq - Frequency of x is : 39
-08:00:38.973 [main] INFO  OptimizedFreq - Frequency of y is : 38
-08:00:38.974 [main] INFO  OptimizedFreq - Frequency of z is : 37
+06:34:29.317 [main] INFO  OptimizedFreq - computing frequency counts for a,b,b,b,b,b,d,h,h,h,p
+06:34:29.750 [main] INFO  OptimizedFreq - **** Starting recursive count computation ****
+06:34:29.755 [main] INFO  OptimizedFreq - Frequency of a is : 1
+06:34:29.761 [main] INFO  OptimizedFreq - Frequency of b is : 5
+06:34:29.761 [main] INFO  OptimizedFreq - Frequency of d is : 1
+06:34:29.761 [main] INFO  OptimizedFreq - Frequency of h is : 3
+06:34:29.761 [main] INFO  OptimizedFreq - Frequency of p is : 1
+06:34:29.807 [main] INFO  OptimizedFreq - **** Starting iterative count computation ****
+06:34:29.808 [main] INFO  OptimizedFreq - Frequency of a is : 1
+06:34:29.808 [main] INFO  OptimizedFreq - Frequency of b is : 5
+06:34:29.808 [main] INFO  OptimizedFreq - Frequency of d is : 1
+06:34:29.808 [main] INFO  OptimizedFreq - Frequency of h is : 3
+06:34:29.808 [main] INFO  OptimizedFreq - Frequency of p is : 1
+06:34:29.808 [main] INFO  OptimizedFreq - computing frequency counts for 1,1,1,1,1,1,1,1,1,1,1,1,1,1
+06:34:29.808 [main] INFO  OptimizedFreq - **** Starting recursive count computation ****
+06:34:29.808 [main] INFO  OptimizedFreq - Frequency of 1 is : 14
+06:34:29.808 [main] INFO  OptimizedFreq - **** Starting iterative count computation ****
+06:34:29.808 [main] INFO  OptimizedFreq - Frequency of 1 is : 14
+06:34:29.809 [main] INFO  OptimizedFreq - computing frequency counts for 2,3,4,5,6,1,1,1,1,1,1,2,2,2
+06:34:29.809 [main] INFO  OptimizedFreq - **** Starting recursive count computation ****
+06:34:29.809 [main] INFO  OptimizedFreq - Frequency of 1 is : 6
+06:34:29.809 [main] INFO  OptimizedFreq - Frequency of 2 is : 4
+06:34:29.809 [main] INFO  OptimizedFreq - Frequency of 3 is : 1
+06:34:29.809 [main] INFO  OptimizedFreq - Frequency of 4 is : 1
+06:34:29.809 [main] INFO  OptimizedFreq - Frequency of 5 is : 1
+06:34:29.809 [main] INFO  OptimizedFreq - Frequency of 6 is : 1
+06:34:29.809 [main] INFO  OptimizedFreq - **** Starting iterative count computation ****
+06:34:29.809 [main] INFO  OptimizedFreq - Frequency of 1 is : 6
+06:34:29.809 [main] INFO  OptimizedFreq - Frequency of 2 is : 4
+06:34:29.809 [main] INFO  OptimizedFreq - Frequency of 3 is : 1
+06:34:29.809 [main] INFO  OptimizedFreq - Frequency of 4 is : 1
+06:34:29.809 [main] INFO  OptimizedFreq - Frequency of 5 is : 1
+06:34:29.809 [main] INFO  OptimizedFreq - Frequency of 6 is : 1
+06:34:29.810 [main] INFO  OptimizedFreq - computing frequency counts for 100,100,100,100,99,98,97,95,96,94,93,92,91,90,90,89,89,89,a,b,c,d,e,f,f,g,g,g,g,h,g,g,g,g,h,h,h,h,h,h,h,h,h,h,h,h,h,h,h,h,h,h,h,h,h,h,h,h,h,h,i,i,i,i,i,i,i,8,8,8,8,8,8,7,7,7,7
+06:34:29.810 [main] INFO  OptimizedFreq - **** Starting recursive count computation ****
+06:34:29.810 [main] INFO  OptimizedFreq - Frequency of 100 is : 4
+06:34:29.810 [main] INFO  OptimizedFreq - Frequency of 7 is : 4
+06:34:29.810 [main] INFO  OptimizedFreq - Frequency of 8 is : 6
+06:34:29.810 [main] INFO  OptimizedFreq - Frequency of 89 is : 3
+06:34:29.811 [main] INFO  OptimizedFreq - Frequency of 90 is : 2
+06:34:29.811 [main] INFO  OptimizedFreq - Frequency of 91 is : 1
+06:34:29.811 [main] INFO  OptimizedFreq - Frequency of 92 is : 1
+06:34:29.811 [main] INFO  OptimizedFreq - Frequency of 93 is : 1
+06:34:29.811 [main] INFO  OptimizedFreq - Frequency of 94 is : 1
+06:34:29.811 [main] INFO  OptimizedFreq - Frequency of 95 is : 1
+06:34:29.811 [main] INFO  OptimizedFreq - Frequency of 96 is : 1
+06:34:29.811 [main] INFO  OptimizedFreq - Frequency of 97 is : 1
+06:34:29.811 [main] INFO  OptimizedFreq - Frequency of 98 is : 1
+06:34:29.811 [main] INFO  OptimizedFreq - Frequency of 99 is : 1
+06:34:29.811 [main] INFO  OptimizedFreq - Frequency of a is : 1
+06:34:29.811 [main] INFO  OptimizedFreq - Frequency of b is : 1
+06:34:29.811 [main] INFO  OptimizedFreq - Frequency of c is : 1
+06:34:29.811 [main] INFO  OptimizedFreq - Frequency of d is : 1
+06:34:29.812 [main] INFO  OptimizedFreq - Frequency of e is : 1
+06:34:29.812 [main] INFO  OptimizedFreq - Frequency of f is : 2
+06:34:29.812 [main] INFO  OptimizedFreq - Frequency of g is : 8
+06:34:29.812 [main] INFO  OptimizedFreq - Frequency of h is : 27
+06:34:29.812 [main] INFO  OptimizedFreq - Frequency of i is : 7
+06:34:29.812 [main] INFO  OptimizedFreq - **** Starting iterative count computation ****
+06:34:29.812 [main] INFO  OptimizedFreq - Frequency of 100 is : 4
+06:34:29.812 [main] INFO  OptimizedFreq - Frequency of 7 is : 4
+06:34:29.812 [main] INFO  OptimizedFreq - Frequency of 8 is : 6
+06:34:29.812 [main] INFO  OptimizedFreq - Frequency of 89 is : 3
+06:34:29.812 [main] INFO  OptimizedFreq - Frequency of 90 is : 2
+06:34:29.813 [main] INFO  OptimizedFreq - Frequency of 91 is : 1
+06:34:29.813 [main] INFO  OptimizedFreq - Frequency of 92 is : 1
+06:34:29.813 [main] INFO  OptimizedFreq - Frequency of 93 is : 1
+06:34:29.813 [main] INFO  OptimizedFreq - Frequency of 94 is : 1
+06:34:29.813 [main] INFO  OptimizedFreq - Frequency of 95 is : 1
+06:34:29.813 [main] INFO  OptimizedFreq - Frequency of 96 is : 1
+06:34:29.813 [main] INFO  OptimizedFreq - Frequency of 97 is : 1
+06:34:29.813 [main] INFO  OptimizedFreq - Frequency of 98 is : 1
+06:34:29.813 [main] INFO  OptimizedFreq - Frequency of 99 is : 1
+06:34:29.813 [main] INFO  OptimizedFreq - Frequency of a is : 1
+06:34:29.813 [main] INFO  OptimizedFreq - Frequency of b is : 1
+06:34:29.813 [main] INFO  OptimizedFreq - Frequency of c is : 1
+06:34:29.813 [main] INFO  OptimizedFreq - Frequency of d is : 1
+06:34:29.813 [main] INFO  OptimizedFreq - Frequency of e is : 1
+06:34:29.813 [main] INFO  OptimizedFreq - Frequency of f is : 2
+06:34:29.813 [main] INFO  OptimizedFreq - Frequency of g is : 8
+06:34:29.813 [main] INFO  OptimizedFreq - Frequency of h is : 27
+06:34:29.814 [main] INFO  OptimizedFreq - Frequency of i is : 7
+06:34:29.814 [main] INFO  OptimizedFreq - computing frequency counts for a,ab,c,de,ff,gg,hhh,gg,1,2,3,4,5,6,7,8,9,a,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,c,d,d,d,d,d,e,e,e,e,e,aaa,bb,11,22,33,44,55,66,77,88,99,100,102,103,104,106,107,108,109,110
+06:34:29.814 [main] INFO  OptimizedFreq - **** Starting recursive count computation ****
+06:34:29.814 [main] INFO  OptimizedFreq - Frequency of 1 is : 1
+06:34:29.814 [main] INFO  OptimizedFreq - Frequency of 100 is : 1
+06:34:29.814 [main] INFO  OptimizedFreq - Frequency of 102 is : 1
+06:34:29.814 [main] INFO  OptimizedFreq - Frequency of 103 is : 1
+06:34:29.814 [main] INFO  OptimizedFreq - Frequency of 104 is : 1
+06:34:29.814 [main] INFO  OptimizedFreq - Frequency of 106 is : 1
+06:34:29.815 [main] INFO  OptimizedFreq - Frequency of 107 is : 1
+06:34:29.815 [main] INFO  OptimizedFreq - Frequency of 108 is : 1
+06:34:29.815 [main] INFO  OptimizedFreq - Frequency of 109 is : 1
+06:34:29.815 [main] INFO  OptimizedFreq - Frequency of 11 is : 1
+06:34:29.815 [main] INFO  OptimizedFreq - Frequency of 110 is : 1
+06:34:29.815 [main] INFO  OptimizedFreq - Frequency of 2 is : 1
+06:34:29.815 [main] INFO  OptimizedFreq - Frequency of 22 is : 1
+06:34:29.815 [main] INFO  OptimizedFreq - Frequency of 3 is : 1
+06:34:29.815 [main] INFO  OptimizedFreq - Frequency of 33 is : 1
+06:34:29.815 [main] INFO  OptimizedFreq - Frequency of 4 is : 1
+06:34:29.815 [main] INFO  OptimizedFreq - Frequency of 44 is : 1
+06:34:29.815 [main] INFO  OptimizedFreq - Frequency of 5 is : 1
+06:34:29.815 [main] INFO  OptimizedFreq - Frequency of 55 is : 1
+06:34:29.815 [main] INFO  OptimizedFreq - Frequency of 6 is : 1
+06:34:29.815 [main] INFO  OptimizedFreq - Frequency of 66 is : 1
+06:34:29.815 [main] INFO  OptimizedFreq - Frequency of 7 is : 1
+06:34:29.815 [main] INFO  OptimizedFreq - Frequency of 77 is : 1
+06:34:29.815 [main] INFO  OptimizedFreq - Frequency of 8 is : 1
+06:34:29.816 [main] INFO  OptimizedFreq - Frequency of 88 is : 1
+06:34:29.816 [main] INFO  OptimizedFreq - Frequency of 9 is : 1
+06:34:29.816 [main] INFO  OptimizedFreq - Frequency of 99 is : 1
+06:34:29.816 [main] INFO  OptimizedFreq - Frequency of a is : 2
+06:34:29.816 [main] INFO  OptimizedFreq - Frequency of aaa is : 1
+06:34:29.816 [main] INFO  OptimizedFreq - Frequency of ab is : 1
+06:34:29.816 [main] INFO  OptimizedFreq - Frequency of bb is : 1
+06:34:29.816 [main] INFO  OptimizedFreq - Frequency of c is : 53
+06:34:29.816 [main] INFO  OptimizedFreq - Frequency of d is : 5
+06:34:29.816 [main] INFO  OptimizedFreq - Frequency of de is : 1
+06:34:29.816 [main] INFO  OptimizedFreq - Frequency of e is : 5
+06:34:29.816 [main] INFO  OptimizedFreq - Frequency of ff is : 1
+06:34:29.816 [main] INFO  OptimizedFreq - Frequency of gg is : 2
+06:34:29.816 [main] INFO  OptimizedFreq - Frequency of hhh is : 1
+06:34:29.816 [main] INFO  OptimizedFreq - **** Starting iterative count computation ****
+06:34:29.827 [main] INFO  OptimizedFreq - Frequency of 1 is : 1
+06:34:29.827 [main] INFO  OptimizedFreq - Frequency of 100 is : 1
+06:34:29.827 [main] INFO  OptimizedFreq - Frequency of 102 is : 1
+06:34:29.828 [main] INFO  OptimizedFreq - Frequency of 103 is : 1
+06:34:29.828 [main] INFO  OptimizedFreq - Frequency of 104 is : 1
+06:34:29.828 [main] INFO  OptimizedFreq - Frequency of 106 is : 1
+06:34:29.828 [main] INFO  OptimizedFreq - Frequency of 107 is : 1
+06:34:29.828 [main] INFO  OptimizedFreq - Frequency of 108 is : 1
+06:34:29.828 [main] INFO  OptimizedFreq - Frequency of 109 is : 1
+06:34:29.828 [main] INFO  OptimizedFreq - Frequency of 11 is : 1
+06:34:29.828 [main] INFO  OptimizedFreq - Frequency of 110 is : 1
+06:34:29.828 [main] INFO  OptimizedFreq - Frequency of 2 is : 1
+06:34:29.828 [main] INFO  OptimizedFreq - Frequency of 22 is : 1
+06:34:29.828 [main] INFO  OptimizedFreq - Frequency of 3 is : 1
+06:34:29.828 [main] INFO  OptimizedFreq - Frequency of 33 is : 1
+06:34:29.828 [main] INFO  OptimizedFreq - Frequency of 4 is : 1
+06:34:29.828 [main] INFO  OptimizedFreq - Frequency of 44 is : 1
+06:34:29.828 [main] INFO  OptimizedFreq - Frequency of 5 is : 1
+06:34:29.828 [main] INFO  OptimizedFreq - Frequency of 55 is : 1
+06:34:29.828 [main] INFO  OptimizedFreq - Frequency of 6 is : 1
+06:34:29.828 [main] INFO  OptimizedFreq - Frequency of 66 is : 1
+06:34:29.828 [main] INFO  OptimizedFreq - Frequency of 7 is : 1
+06:34:29.828 [main] INFO  OptimizedFreq - Frequency of 77 is : 1
+06:34:29.829 [main] INFO  OptimizedFreq - Frequency of 8 is : 1
+06:34:29.829 [main] INFO  OptimizedFreq - Frequency of 88 is : 1
+06:34:29.829 [main] INFO  OptimizedFreq - Frequency of 9 is : 1
+06:34:29.829 [main] INFO  OptimizedFreq - Frequency of 99 is : 1
+06:34:29.829 [main] INFO  OptimizedFreq - Frequency of a is : 2
+06:34:29.829 [main] INFO  OptimizedFreq - Frequency of aaa is : 1
+06:34:29.829 [main] INFO  OptimizedFreq - Frequency of ab is : 1
+06:34:29.829 [main] INFO  OptimizedFreq - Frequency of bb is : 1
+06:34:29.829 [main] INFO  OptimizedFreq - Frequency of c is : 53
+06:34:29.829 [main] INFO  OptimizedFreq - Frequency of d is : 5
+06:34:29.829 [main] INFO  OptimizedFreq - Frequency of de is : 1
+06:34:29.829 [main] INFO  OptimizedFreq - Frequency of e is : 5
+06:34:29.829 [main] INFO  OptimizedFreq - Frequency of ff is : 1
+06:34:29.829 [main] INFO  OptimizedFreq - Frequency of gg is : 2
+06:34:29.829 [main] INFO  OptimizedFreq - Frequency of hhh is : 1
+06:34:29.841 [main] INFO  OptimizedFreq - computing frequency counts for k,r,s,z,t,y,c,x,o,a,n,w,d,m,o,l,a,a,q,q,g,o,a,x,i,j,c,s,d,h,y,l,s,d,c,o,z,u,d,w,d,f,g,v,r,z,k,k,v,e,a,g,n,u,k,o,g,w,p,z,t,a,r,a,h,d,b,w,x,y,v,q,t,p,y,e,v,x,q,m,k,d,l,o,i,v,f,x,h,l,v,w,d,d,v,b,q,u,x,p,u,x,s,p,v,v,g,e,y,u,k,o,i,w,m,g,n,d,r,v,m,o,h,t,n,w,e,m,l,s,l,c,c,d,r,d,y,h,v,e,c,x,m,m,e,t,s,d,r,k,z,i,l,a,h,r,x,r,q,a,n,r,u,n,b,v,i,h,l,i,d,h,f,q,x,r,v,v,p,n,g,j,w,p,l,z,b,f,d,f,y,v,t,r,r,a,l,o,h,o,x,l,b,a,t,b,m,r,p,r,o,b,o,d,d,e,w,u,g,u,b,j,n,u,e,i,p,y,a,k,h,u,o,q,g,a,c,v,y,v,f,x,s,r,t,y,i,n,y,u,q,c,y,n,f,p,d,o,m,a,k,p,e,w,z,i,i,k,f,b,r,x,n,r,z,o,w,w,t,p,w,p,l,m,q,u,i,y,s,u,g,j,z,j,e,o,r,z,i,n,k,p,i,f,j,c,m,a,x,x,u,o,w,h,n,b,v,q,y,p,m,m,i,w,y,z,s,g,f,m,p,i,r,b,c,j,j,b,c,c,x,k,s,h,h,h,d,o,z,n,d,l,p,f,p,b,f,b,y,j,m,q,y,w,g,h,t,j,a,x,e,m,r,e,w,h,p,a,o,t,g,g,a,d,v,s,k,r,c,p,k,t,g,h,v,s,k,a,h,v,o,y,e,l,w,r,v,q,m,i,t,n,j,y,b,q,q,z,m,k,w,c,z,n,c,j,l,f,r,r,l,p,m,u,m,w,x,f,j,n,d,c,w,e,o,x,d,z,y,t,v,h,e,v,r,b,d,z,x,z,i,c,w,l,s,i,q,s,g,n,m,n,w,f,k,j,p,h,m,i,c,n,c,y,k,h,w,z,s,q,d,x,i,n,y,z,s,p,l,s,m,m,w,m,o,j,c,d,i,t,g,h,m,j,c,i,v,f,a,d,s,i,i,t,b,b,r,j,t,p,v,f,h,o,b,o,v,w,o,m,v,f,w,a,x,r,p,f,j,r,q,l,l,u,l,y,h,s,p,t,r,w,q,y,d,p,w,f,q,z,v,e,y,h,s,w,w,i,u,o,a,b,m,p,s,o,a,e,p,c,e,y,r,k,x,a,k,b,r,v,u,x,g,i,t,k,k,e,f,l,a,d,x,z,a,p,g,h,s,y,p,d,m,y,f,b,j,i,z,n,u,p,d,y,n,i,b,t,o,k,j,s,n,t,i,l,p,t,c,o,q,d,d,p,r,y,m,l,f,a,g,k,u,u,c,h,j,a,g,o,c,t,o,j,c,z,b,c,t,u,n,v,c,q,l,g,k,o,p,n,l,f,l,q,g,m,m,q,t,x,i,b,l,x,m,f,e,s,u,u,c,e,g,r,j,u,n,d,n,d,o,z,o,d,q,r,i,s,e,q,b,l,q,c,g,i,a,d,d,f,n,k,n,e,o,w,q,q,c,k,t,l,u,w,d,l,x,h,f,x,z,s,g,j,s,a,n,v,x,b,o,x,e,s,k,w,z,c,d,p,w,j,m,c,k,h,y,v,f,n,u,v,n,k,v,b,y,m,w,w,r,m,y,b,p,k,d,b,i,k,l,q,u,o,k,c,v,q,o,g,o,o,k,t,z,p,u,w,y,o,f,y,y,p,v,w,p,t,z,x,i,d,b,k,z,m,r,d,m,c,s,a,s,e,f,h,r,z,k,o,a,u,o,l,e,a,g,x,a,n,k,d,n,u,v,c,u,y,j,v,h,e,j,a,d,s,x,n,b,m,c,s,u,d,q,r,i,z,m,x,o,l,a,s,q,n,q,t,m,u,u,c,p,c,j,w,l,q,m,b,o,x,z,n,s,i,r,q,h,x,l,h,f,k,v,q,i,e,p,l,j,z,i,i,o,u,g,n,s,w,a,n,f,n,r,w,f,h,f,o,d,z,y,z,o,f,o,o,k,w,z,l,q,n,q,f,i,t,j,i,m,t,u,e,q,w,d,i,v,w,n,n,g,x,a,s,z,f,x,f
+06:34:29.844 [main] INFO  OptimizedFreq - **** Starting recursive count computation ****
+06:34:29.844 [main] INFO  OptimizedFreq - Frequency of a is : 38
+06:34:29.845 [main] INFO  OptimizedFreq - Frequency of b is : 33
+06:34:29.845 [main] INFO  OptimizedFreq - Frequency of c is : 39
+06:34:29.845 [main] INFO  OptimizedFreq - Frequency of d is : 48
+06:34:29.845 [main] INFO  OptimizedFreq - Frequency of e is : 29
+06:34:29.845 [main] INFO  OptimizedFreq - Frequency of f is : 38
+06:34:29.846 [main] INFO  OptimizedFreq - Frequency of g is : 30
+06:34:29.846 [main] INFO  OptimizedFreq - Frequency of h is : 34
+06:34:29.846 [main] INFO  OptimizedFreq - Frequency of i is : 42
+06:34:29.846 [main] INFO  OptimizedFreq - Frequency of j is : 30
+06:34:29.846 [main] INFO  OptimizedFreq - Frequency of k is : 39
+06:34:29.846 [main] INFO  OptimizedFreq - Frequency of l is : 38
+06:34:29.847 [main] INFO  OptimizedFreq - Frequency of m is : 43
+06:34:29.847 [main] INFO  OptimizedFreq - Frequency of n is : 44
+06:34:29.847 [main] INFO  OptimizedFreq - Frequency of o is : 50
+06:34:29.847 [main] INFO  OptimizedFreq - Frequency of p is : 41
+06:34:29.847 [main] INFO  OptimizedFreq - Frequency of q is : 40
+06:34:29.847 [main] INFO  OptimizedFreq - Frequency of r is : 40
+06:34:29.848 [main] INFO  OptimizedFreq - Frequency of s is : 36
+06:34:29.848 [main] INFO  OptimizedFreq - Frequency of t is : 31
+06:34:29.848 [main] INFO  OptimizedFreq - Frequency of u is : 37
+06:34:29.848 [main] INFO  OptimizedFreq - Frequency of v is : 41
+06:34:29.848 [main] INFO  OptimizedFreq - Frequency of w is : 45
+06:34:29.848 [main] INFO  OptimizedFreq - Frequency of x is : 39
+06:34:29.849 [main] INFO  OptimizedFreq - Frequency of y is : 38
+06:34:29.849 [main] INFO  OptimizedFreq - Frequency of z is : 37
+06:34:29.849 [main] INFO  OptimizedFreq - **** Starting iterative count computation ****
+06:34:29.850 [main] INFO  OptimizedFreq - Frequency of a is : 38
+06:34:29.850 [main] INFO  OptimizedFreq - Frequency of b is : 33
+06:34:29.851 [main] INFO  OptimizedFreq - Frequency of c is : 39
+06:34:29.852 [main] INFO  OptimizedFreq - Frequency of d is : 48
+06:34:29.852 [main] INFO  OptimizedFreq - Frequency of e is : 29
+06:34:29.853 [main] INFO  OptimizedFreq - Frequency of f is : 38
+06:34:29.853 [main] INFO  OptimizedFreq - Frequency of g is : 30
+06:34:29.853 [main] INFO  OptimizedFreq - Frequency of h is : 34
+06:34:29.854 [main] INFO  OptimizedFreq - Frequency of i is : 42
+06:34:29.854 [main] INFO  OptimizedFreq - Frequency of j is : 30
+06:34:29.854 [main] INFO  OptimizedFreq - Frequency of k is : 39
+06:34:29.855 [main] INFO  OptimizedFreq - Frequency of l is : 38
+06:34:29.855 [main] INFO  OptimizedFreq - Frequency of m is : 43
+06:34:29.855 [main] INFO  OptimizedFreq - Frequency of n is : 44
+06:34:29.855 [main] INFO  OptimizedFreq - Frequency of o is : 50
+06:34:29.855 [main] INFO  OptimizedFreq - Frequency of p is : 41
+06:34:29.855 [main] INFO  OptimizedFreq - Frequency of q is : 40
+06:34:29.855 [main] INFO  OptimizedFreq - Frequency of r is : 40
+06:34:29.856 [main] INFO  OptimizedFreq - Frequency of s is : 36
+06:34:29.856 [main] INFO  OptimizedFreq - Frequency of t is : 31
+06:34:29.856 [main] INFO  OptimizedFreq - Frequency of u is : 37
+06:34:29.856 [main] INFO  OptimizedFreq - Frequency of v is : 41
+06:34:29.856 [main] INFO  OptimizedFreq - Frequency of w is : 45
+06:34:29.856 [main] INFO  OptimizedFreq - Frequency of x is : 39
+06:34:29.856 [main] INFO  OptimizedFreq - Frequency of y is : 38
+06:34:29.857 [main] INFO  OptimizedFreq - Frequency of z is : 37
 
-BUILD SUCCESSFUL in 5s
-2 actionable tasks: 1 executed, 1 up-to-date
-8:00:39 AM: Task execution finished 'OptimizedFreq.main()'.
-
+BUILD SUCCESSFUL in 2s
+2 actionable tasks: 2 executed
+6:34:29 AM: Task execution finished 'OptimizedFreq.main()'.

@@ -61,10 +61,11 @@ public class OptimizedFreq {
             processed.clear();
             Map<String, Integer> countMap = new UnifiedMap<>();
             log.info("**** Starting iterative count computation ****");
+            OptimizedFreq.computeLinear(0, arr.length - 1, arr, countMap);
             for (String val : arr)
                 if (!processed.contains(val)) {
-                    log.info("Frequency of {} is : {}", val,
-                            OptimizedFreq.processImperative(0, arr.length - 1, arr, val, countMap));
+                    int freq = countMap.get(val);
+                    log.info("Frequency of {} is : {}", val, freq);
                     processed.add(val);
                 }
         }
@@ -94,7 +95,6 @@ public class OptimizedFreq {
             lastIndex = OptimizedFreq.findLastIndex(startIndex, endIndex, arr, element);
             firstIndex = OptimizedFreq.findFirstIndex(startIndex, endIndex, arr, element);
         }
-
         return lastIndex != -1 ? lastIndex - firstIndex + 1 : -1;
     }
 
@@ -102,32 +102,14 @@ public class OptimizedFreq {
      * @param startIndex
      * @param endIndex
      * @param arr
-     * @param element
-     * @param countMap
-     * @return frequency count of the element
-     * This is an O(N) function in terms of time complexity - worst case
-     * is when array has all same element duplicated we have to do a full N comparisons.
+     * @param countMap   This is an O(N) function in terms of time complexity. We iterate
+     *                   through the entire array segment once and compute frequencies for all elements.
      */
 
-    public static Integer processImperative(int startIndex, int endIndex, String arr[], String element, Map<String, Integer> countMap) {
+    public static void computeLinear(int startIndex, int endIndex, String arr[], Map<String, Integer> countMap) {
         int count = 0;
-        // Optimization: If entire array segment is one element, we can just take the
-        // difference of the indices to get the count.
-
-        if (arr[startIndex].equals(element) && arr[endIndex].equals(element)) {
-            count = endIndex - startIndex + 1;
-            countMap.put(element, count);
-        } else
-            for (Comparable<String> s1 : arr) {
-                if (s1.equals(element)) {
-                    Integer freq = countMap.get(element);
-                    countMap.put(element, freq == null ? 1 : freq + 1);
-                    // if we are traversing elements that are lexicographically greater then the element
-                    // we are searching for, because the array is sorted, we will no longer encounter
-                    // that element, and we can stop iterating through loop.
-                } else if (s1.compareTo(element) > 0) break;
-            }
-        return countMap.get(element);
+        for (String s1 : arr)
+            countMap.put(s1, !countMap.containsKey(s1) ? 1 : countMap.get(s1) + 1);
     }
 
     /**
