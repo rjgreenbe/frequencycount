@@ -1,4 +1,5 @@
 import org.eclipse.collections.impl.list.mutable.FastList;
+import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -58,7 +59,7 @@ public class OptimizedFreq {
                 }
             }
             processed.clear();
-            Map<String, Integer> countMap = new HashMap<>();
+            Map<String, Integer> countMap = new UnifiedMap<>();
             log.info("**** Starting iterative count computation ****");
             for (String val : arr)
                 if (!processed.contains(val)) {

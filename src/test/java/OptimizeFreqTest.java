@@ -1,7 +1,6 @@
 import junit.framework.TestCase;
 import org.eclipse.collections.impl.map.mutable.UnifiedMap;
 import org.junit.jupiter.api.Test;
-
 import java.util.*;
 
 /**
@@ -47,7 +46,6 @@ public class OptimizeFreqTest extends TestCase {
         Map<String, Integer> countMap = new UnifiedMap<>();
         for (String p : pList) {
             if (!sSet.contains(p)) {
-                System.out.println("p = " + p);
                 Integer count1 = OptimizedFreq.processBinarySearch(0, MaxSize - 1, arr, p);
                 Integer count2 = OptimizedFreq.processImperative(0, arr.length - 1, arr, p, countMap);
                 assertEquals(count1, count2);
