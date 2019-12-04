@@ -103,8 +103,9 @@ public class OptimizedFreq {
      * @param endIndex
      * @param arr
      * @param element
+     * @param countMap
      * @return frequency count of the element
-     * This is an O(n) function in terms of time complexity - worst case
+     * This is an O(N) function in terms of time complexity - worst case
      * is when array has all same element duplicated we have to do a full N comparisons.
      */
 
