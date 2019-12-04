@@ -33,7 +33,9 @@ public class OptimizedFreq {
 
     /**
      * @param dataFile
-     * @throws FileNotFoundException Input data from file and insert into array for processing
+     * @throws FileNotFoundException
+     * <p>
+     * Input data from file and insert into array for processing
      */
 
     static private void processDataFile(String dataFile) throws FileNotFoundException {
