@@ -46,7 +46,7 @@ public class OptimizeFreqTest extends TestCase {
         Set<String> sSet = new TreeSet<>();
         Map<String, Integer> countMap = new UnifiedMap<>();
         OptimizedFreq.computeLinear(0, arr.length - 1, arr, countMap);
-        for (String p : pList) {
+        for (String p : arr) {
             if (!sSet.contains(p)) {
                 Integer count1 = OptimizedFreq.processBinarySearch(0, MaxSize - 1, arr, p);
                 Integer count2 = countMap.get(p);
@@ -62,7 +62,7 @@ public class OptimizeFreqTest extends TestCase {
     @Test
     public void test2() {
         init();
-        Integer expectedValue = new Integer(-1);
+        Integer expectedValue = -1;
         assertEquals(OptimizedFreq.processBinarySearch(0, MaxSize - 1, arr, "foo"), expectedValue);
     }
 }
